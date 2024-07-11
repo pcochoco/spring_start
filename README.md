@@ -1,4 +1,4 @@
-# 스프링 핵심원리 강의 기반
+# 스프링 핵심원리
 ### 핵심 기능과 class 
 1.  service(business logic 캡슐화), repository(db interaction)
 2. order을 member에 따라 구분하고 discount policy 적용
