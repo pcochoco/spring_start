@@ -18,12 +18,31 @@
 - spring bean 등록
     - ApplicationContext(Bean Factory) interface : xml, java ...로 구현 (BeanFactory의 상속)
     - @ComponentScan - @Component : 업무 로직
-      - @ComonentScan 
+      - @ComponentSccan : 빈 자동 등록
+      - Autowired(1개면 생략)
+      - Component, Controller, Service, Repository, Configuration 대상
+      - Filter
     - @Configruation - @Bean : 기술 지원 (bean을 하나씩 써주기 번거로움)
  
 
+### 의존관계 주입
+생성자 주입 + 수정자 주입 (필드, 일반 메서드 주입 x)
+
+
+옵션 처리 : 주입할 스프링 빈이 없더라도 동작해야하는 경우 
+- Autowired : 대상이 없으면 호출 x
+- Nullable
+- Optional : empty 자료형 반환
+
+
+*롬복 : Autowired 대신 RequiredArgsConstructor
+
+
+조회 빈이 두개 이상인 경우 : Qualifier > Primary 사용, Autowired 필드명 매칭
+
 ### 스프링 빈 
-- 빈 생명주기 콜백 : interface, method 지정, annotation(권장)
+- 빈 생명주기 콜백 : interface, method 지정, annotation(@PostConstruct, @PreDestroy 권장)
+      데이터베이스 커넥션 풀로 서버와 연결 시 객체 초기화, 종료 작업 
 - 빈 : spring container이 관리하는 객체
 - 빈 등록 후 생성자 호출 + 의존관계 주입
 - 빈 definition 
@@ -33,7 +52,10 @@
     - 싱글톤 : 한번 생성되어 끝까지 유지, 객체 하나 생성 후 공유 (state x)
       - static 변수, static 메서드 활용
       - 자바 코드에 대해 cglib 바이트코드 조작 라이브러리를 통해 AppConfig 클래스를 상속받은 다른 클래스를 만들어 등록 
-    - 프로토타입 : 매번 새로 생성됨, 생성 후 초기화까지 컨테이너가 처리 
+    - 프로토타입 : 매번 새로 생성됨, 생성 후 초기화까지 컨테이너가 처리 이후 관리 x, 종료 메서드 x 
     - 동시 사용 문제 -> 싱글톤에 따라 프로토타입 빈이 한번 생성 + 주입 이후 계속 쓰임
-    - Provider로 해결(DL)
+    - Provider로 해결(DL : 의존관계 조회, 스프링 컨테이너에서 직접 필요한 의존관계를 찾음)
+ 
+
+### 웹 스코프 
 
