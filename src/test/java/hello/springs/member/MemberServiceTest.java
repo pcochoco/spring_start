@@ -6,11 +6,13 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 public class MemberServiceTest {
-    //MemberService memberService = new MemberService(); 해줬던 것 변형
+    //dip, ocp 안지킨 코드
+    //MemberService memberService = new MemberService();
 
     MemberService memberService;
     @BeforeEach
     public void beforeEach(){
+        //dip, ocp를 지키는 경우
         AppConfig appConfig = new AppConfig();
         memberService = appConfig.memberService();
     }
@@ -18,10 +20,11 @@ public class MemberServiceTest {
     @Test
     void join(){
         //given
-        Member member=new Member(Grade.VIP, 1L, "memberA");
+        Member member = new Member(Grade.VIP, 1L, "memberA");
+
         //when
         memberService.join(member);
-        Member findMember=memberService.findMember(1L);
+        Member findMember = memberService.findMember(1L);
 
         //then
         //Assertions라는 api를 활용

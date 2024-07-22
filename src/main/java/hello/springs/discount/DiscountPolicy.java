@@ -2,6 +2,8 @@ package hello.springs.discount;
 
 import hello.springs.member.Member;
 //F2로 오류난 곳으로 이동
+
+//정률할인정책과 정액할인정책을 구현할 인터페이스
 public interface DiscountPolicy {
 
     int discount(Member member, int price) ;

@@ -13,6 +13,7 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 //order까지 만들어 테스트해보는 일차적 방안
 public class OrderApp {
     public static void main(String[] args) {
+        //AppConfig을 활용하는 경우
         //AppConfig appConfig = new AppConfig();
         //MemberService memberService = appConfig.memberService();
         //OrderService orderService = appConfig.orderService();
@@ -24,8 +25,6 @@ public class OrderApp {
         ApplicationContext applicationContext = new AnnotationConfigApplicationContext(AppConfig.class);
         MemberService memberService = applicationContext.getBean("memberService", MemberService.class);
         OrderService orderService = applicationContext.getBean("orderService", OrderService.class);
-
-
 
         Long memberId = 1L;
         Member member = new Member(Grade.VIP, memberId, "memberA" );
