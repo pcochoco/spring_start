@@ -11,11 +11,8 @@ import org.junit.jupiter.api.Test;
 
 public class orderServiceTest {
 
-    //MemberService memberService = new MemberServiceImpl();
-    //OrderService orderService = new OrderServiceImpl();
-
-    MemberService memberService;
-    OrderService orderService;
+    MemberService memberService; //MemberService memberService = new MemberServiceImpl();
+    OrderService orderService; //OrderService orderService = new OrderServiceImpl();
 
     @BeforeEach
     public void beforeEach(){

@@ -1,8 +1,5 @@
 package hello.springs.beanfind;
 
-import hello.springs.AppConfig;
-import hello.springs.discount.DiscountPolicy;
-import hello.springs.member.Member;
 import hello.springs.member.MemberRepository;
 import hello.springs.member.MemoryMemberRepository;
 import org.junit.jupiter.api.DisplayName;
@@ -17,7 +14,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.util.Map;
 
-public class ApplicationContextSameBinFindTest {
+public class ApplicationContextSameBeanFindTest {
     AnnotationConfigApplicationContext ac = new AnnotationConfigApplicationContext(SameBeanConfig.class);
 
 
