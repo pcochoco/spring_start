@@ -54,7 +54,7 @@
     - 소멸전 콜백
     - @PostConstruct, @PreDestroy 활용 
     
-    - 싱글톤 빈 : 한번 생성되어 끝까지 유지, 객체 하나 생성 후 공유(싱글톤 레지스트리, 빈 등록 기본 방식)
+    - 싱글톤 빈 : 한번 생성되어 끝까지 유지, 객체 하나 생성 후 공유([싱글톤 레지스트리](src/main/java/hello/springs/member/MemberServiceImpl.java), 빈 등록 기본 방식)
       - static 변수, static 메서드 활용 (state x)
       - 자바 코드에 대해 cglib 바이트코드 조작 라이브러리를 통해 AppConfig 클래스를 상속받은 다른 클래스를 만들어 등록
           -> @Configuration에 의해 AppConfig에서 여러번 객체를 불러도 하나로 호출됨 
