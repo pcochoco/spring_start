@@ -1,6 +1,6 @@
 # 스프링 핵심원리
 ### 핵심 기능과 class 
-1.  service(business logic 캡슐화 + repository 메서드 호출), repository(db interaction)
+1.  [service](https://github.com/pcochoco/spring_start/blob/main/src/main/java/hello/springs/member/MemberService.java)(business logic 캡슐화 + repository 메서드 호출), [repository](https://github.com/pcochoco/spring_start/blob/main/src/main/java/hello/springs/member/MemberRepository.java)(db interaction)
 2. order을 member에 따라 구분하고 discount policy 적용
 
    
@@ -21,7 +21,7 @@
    
  
 
-### 의존관계 주입(필드, 일반 메서드 주입 x)
+### [의존관계 주입](src/main/java/hello/springs/member/MemberServiceImpl.java)(필드, 일반 메서드 주입 x)
 생성자 주입(불변, 필수 등록 -> 없으면 에러, 한번 초기화) + 수정자 주입(@Setter)
 
 
