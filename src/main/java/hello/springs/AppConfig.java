@@ -15,6 +15,10 @@ import org.springframework.context.annotation.Configuration;
 //객체의 생성과 의존관계 주입에만 관여 -> 구현체는 생성된 객체로 사용만 신경쓸 수 있음
 //DI(IoC) container = AppConfig
 @Configuration
+/*Configuration : singleton으로 빈을 등록, cglib 바이트코드 조작 라이브러리에 따른 임의의 클래스 상속 후 빈으로 등록
+여러번 객체 호출에도 같은 객체 반환 가능
+=> Bean만 활용 시 singleton을 보장하지 않음
+ */
 public class AppConfig {
     @Bean
     //spring container로 등록되도록 하는 어노테이션

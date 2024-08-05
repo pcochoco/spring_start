@@ -4,12 +4,11 @@ import hello.springs.AppConfig;
 import hello.springs.member.MemberService;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-
-import static org.junit.Assert.assertThat;
+import org.assertj.core.api.Assertions;
 //comparing instances of singleton
 public class SingletonTest {
     @Test
-    @DisplayName("DI container without spring")
+    @DisplayName("DI container without spring") //다른 참조값, 비교해도 다름
     void pureContainer(){
         AppConfig appConfig = new AppConfig();
 
@@ -20,6 +19,6 @@ public class SingletonTest {
         System.out.println("memberService1 = " + memberService1);
         System.out.println("memberService2 = " + memberService2);
 
-        assertThat(memberService2).isNotSameAs(memberService1);
+        Assertions.assertThat(memberService1).isNotSameAs(memberService2);
     }
 }
