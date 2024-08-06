@@ -21,8 +21,11 @@ public class OrderServiceImpl implements OrderService{
 
     private final MemberRepository memberRepository;
     private DiscountPolicy discountPolicy;
+    //@Autowired에 의한 타입 매칭 -> 여러 빈이면 필드명으로
+    //private DiscountPolicy fixDiscountPolicy;
 
     public OrderServiceImpl(MemberRepository memberRepository, DiscountPolicy discountPolicy){
+        //Qualifier 사용시 @Qualifier("fixDiscountPolicy") DiscountPolicy
         this.memberRepository = memberRepository;
         this.discountPolicy = discountPolicy;
     }

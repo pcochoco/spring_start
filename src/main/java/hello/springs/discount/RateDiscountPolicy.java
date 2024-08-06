@@ -2,7 +2,9 @@ package hello.springs.discount;
 
 import hello.springs.member.Grade;
 import hello.springs.member.Member;
+import org.springframework.context.annotation.Primary;
 
+@Primary //타입 조회 시 여러 결과 -> 우선권
 public class RateDiscountPolicy implements DiscountPolicy{
     private int discountPercent=10;
     @Override
