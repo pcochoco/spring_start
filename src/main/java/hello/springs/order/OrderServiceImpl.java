@@ -5,7 +5,9 @@ import hello.springs.discount.FixDiscountPolicy;
 import hello.springs.member.Member;
 import hello.springs.member.MemberRepository;
 import hello.springs.member.MemoryMemberRepository;
+import org.springframework.stereotype.Component;
 
+@Component
 public class OrderServiceImpl implements OrderService{
 
     //OrderService입장에서 할인정책에 관해 몰라도 됨 => 단일 책임 원칙 (변경 x)

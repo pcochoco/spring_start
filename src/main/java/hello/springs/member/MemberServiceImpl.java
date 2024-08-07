@@ -1,5 +1,9 @@
 package hello.springs.member;
+
+import org.springframework.stereotype.Component;
+
 //구현체가 하나인 경우 Impl을 붙이는 관례
+@Component //구현체를 component scan을 통해 bean으로 등록
 public class MemberServiceImpl implements MemberService{
     private final MemberRepository memberRepository; //생성자 주입용 private, final -> 불변
     // = new MemoryMemberRepository();

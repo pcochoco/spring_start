@@ -1,8 +1,11 @@
 package hello.springs.member;
 
+import org.springframework.stereotype.Component;
+
 import java.util.HashMap;
 import java.util.Map;
 //자동완성 : ctrl shift space
+@Component
 public class MemoryMemberRepository implements MemberRepository{
 
     //동시 접근을 위한 concurrent hashmap을 씀
