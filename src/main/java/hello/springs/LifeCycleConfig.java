@@ -4,7 +4,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-static class LifeCycleConfig {
+class LifeCycleConfig {//configuration class에 static keyword 불가
     @Bean
     public NetworkClient networkClient(){
         NetworkClient networkClient = new NetworkClient();

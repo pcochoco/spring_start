@@ -5,6 +5,11 @@ import hello.springs.member.MemberService;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.assertj.core.api.Assertions;
+import org.springframework.context.annotation.Scope;
+
+import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
+
 //comparing instances of singleton
 public class SingletonTest {
     @Test
@@ -20,5 +25,19 @@ public class SingletonTest {
         System.out.println("memberService2 = " + memberService2);
 
         Assertions.assertThat(memberService1).isNotSameAs(memberService2);
+    }
+
+    //singleton bean
+    @Scope("singleton")
+    static class SingletonBean(){
+        @PostConstruct
+        public void init(){
+            System.out.println("start");
+        }
+
+        @PreDestroy
+        public void destroy(){
+            System.out.println("destroy");
+        }
     }
 }

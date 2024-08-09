@@ -3,7 +3,7 @@ package hello.springs;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
-
+//PostConstruct, PreDestroy annotation을 통한 콜백 : 객체 사용, 소멸 전 각자 필요한 작업을 해주도록 호출
 public class NetworkClient {
     private String url;
 
