@@ -1,4 +1,4 @@
-package hello.springs;
+package hello.springs.singleton_with_prototype;
 
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
