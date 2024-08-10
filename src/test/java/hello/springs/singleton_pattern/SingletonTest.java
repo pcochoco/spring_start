@@ -25,6 +25,8 @@ public class SingletonTest {
         System.out.println("memberService2 = " + memberService2);
 
         Assertions.assertThat(memberService1).isNotSameAs(memberService2);
+
+        ac.close();
     }
 
     //singleton bean

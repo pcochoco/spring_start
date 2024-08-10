@@ -1,10 +1,10 @@
 package hello.springs;
 
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.annotation.Scope;
 
-import static org.junit.Assert.assertThat;
 
 public class PrototypeTest {
     @Test
@@ -16,8 +16,9 @@ public class PrototypeTest {
         PrototypeBean pb2 = ac.getBean(PrototypeBean.class);
         System.out.println("bean1 = " + pb1);
         System.out.println("bean2 = " + pb2);
-        assertThat(pb1).isSameAs(pb2);
+        Assertions.assertThat(pb1).isNotSameAs(pb2);
 
+        ac.close(); //중료시에 소멸전 콜백은 일어나지 않음
     }
 
     @Scope("prototype")
