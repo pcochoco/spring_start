@@ -54,13 +54,13 @@
     - 소멸전 콜백
     - @PostConstruct, @PreDestroy 활용 
     
-    - 싱글톤 빈 : 한번 생성되어 끝까지 유지, 객체 하나 생성 후 공유([싱글톤 레지스트리](src/main/java/hello/springs/member/MemberServiceImpl.java), 빈 등록 기본 방식)
+    - [싱글톤 빈](src/test/java/hello/springs/singleton_pattern/SingletonTest.java) : 한번 생성되어 끝까지 유지, 객체 하나 생성 후 공유([싱글톤 레지스트리](src/main/java/hello/springs/member/MemberServiceImpl.java), 빈 등록 기본 방식)
       - static 변수, static 메서드 활용 (state x)
       - 자바 코드에 대해 cglib 바이트코드 조작 라이브러리를 통해 AppConfig 클래스를 상속받은 다른 클래스를 만들어 등록
           -> @Configuration에 의해 AppConfig에서 여러번 객체를 불러도 하나로 호출됨 
-    - 프로토타입 : 매번 새로 생성됨, 생성 후 초기화까지 컨테이너가 처리 이후 관리 x, 종료 메서드 x 
-    - 동시 사용 문제 -> 싱글톤에 따라 프로토타입 빈이 한번 생성 + 주입 이후 계속 쓰임
-      Provider로 해결(DL : 의존관계 조회, 스프링 컨테이너에서 직접 필요한 의존관계를 찾는 기능)
+    - [프로토타입](src/test/java/hello/springs/singleton_with_prototype/PrototypeTest.java) : 매번 새로 생성됨, 생성 후 초기화까지 컨테이너가 처리 이후 관리 x, 종료 메서드 x 
+    - [동시 사용 문제](src/test/java/hello/springs/singleton_with_prototype/SingletonWithPrototypeTest.java) -> 싱글톤에 따라 프로토타입 빈이 한번 생성 + 주입 이후 계속 쓰임
+      [Provider로 해결](src/test/java/hello/springs/singleton_with_prototype/PrototypeProviderTest.java)(DL : 의존관계 조회, 스프링 컨테이너에서 직접 필요한 의존관계를 찾는 기능)
   
  
 
