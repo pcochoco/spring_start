@@ -15,18 +15,17 @@ public class SingletonTest {
     @Test
     @DisplayName("DI container without spring") //다른 참조값, 비교해도 다름
     void pureContainer(){
-        AppConfig appConfig = new AppConfig();
+        AppConfig ac = new AppConfig();
 
-        MemberService memberService1 = appConfig.memberService();
+        MemberService memberService1 = ac.memberService();
 
-        MemberService memberService2 = appConfig.memberService();
+        MemberService memberService2 = ac.memberService();
 
         System.out.println("memberService1 = " + memberService1);
         System.out.println("memberService2 = " + memberService2);
 
         Assertions.assertThat(memberService1).isNotSameAs(memberService2);
 
-        ac.close();
     }
 
     //singleton bean
