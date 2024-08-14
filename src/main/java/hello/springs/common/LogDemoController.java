@@ -12,8 +12,9 @@ import javax.servlet.http.HttpServletRequest;
 @RequiredArgsConstructor
 public class LogDemoController {
     private final LogDemoService logDemoService;
-    //private final MyLogger myLogger;
-    private final ObjectProvider<MyLogger> myLoggerProvider;
+    private final MyLogger myLogger; //proxy 활용
+
+    //private final ObjectProvider<MyLogger> myLoggerProvider;  //provider 활용
 
     @RequestMapping("log-demo")
     @ResponseBody
@@ -21,7 +22,7 @@ public class LogDemoController {
         String requestURL = request.getRequestURL().toString();
         //Provider 사용 DL(의존관계 찾음), getObject 호출 전까지 request scope bean 생성 지연
         //따로 호출 시에도 같은 HTTP 요청이면 같은 스프링 빈 반환
-        MyLogger myLogger = myLoggerProvider.getObject();
+        //MyLogger myLogger = myLoggerProvider.getObject();
         myLogger.setRequestURL(requestURL);
 
         myLogger.log("controller test");
