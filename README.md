@@ -65,13 +65,12 @@
   
  
 
-### 웹 스코프 
-웹 환경에서만 동작하는 스코프, 종료 메서드까지 호출
+웹 스코프 : 웹 환경에서만 동작하는 스코프, 종료 메서드까지 호출
 
 
 ex) request scope ... 
 
-## request scope 예제 : http 요청 하나가 들어오고 나갈때까지 유지 
+## [request scope 예제](src/main/java/hello/springs/common/MyLogger.java) : http 요청 하나가 들어오고 나갈때까지 유지 
 - http 요청 끝날 때 소멸
 - 초기화 메서드 : 다른 http 요청과 구별을 위한 uuid
 - [프록시](src/main/java/hello/springs/common/MyLogger.java) : 원래 클래스 상속받은 가짜 객체를 연관관계 주입해 실제 객체 호출을 미룸 (cglib)
