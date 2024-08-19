@@ -61,6 +61,7 @@
     - [프로토타입](src/test/java/hello/springs/singleton_with_prototype/PrototypeTest.java) : 매번 새로 생성됨, 생성 후 초기화까지 컨테이너가 처리 이후 관리 x, 종료 메서드 x 
     - [동시 사용 문제](src/test/java/hello/springs/singleton_with_prototype/SingletonWithPrototypeTest.java) -> 싱글톤에 따라 프로토타입 빈이 한번 생성 + 주입 이후 계속 쓰임
       [Provider로 해결](src/test/java/hello/springs/singleton_with_prototype/PrototypeProviderTest.java)(DL : 의존관계 조회, 스프링 컨테이너에서 직접 필요한 의존관계를 찾는 기능)
+      
   
  
 
@@ -73,9 +74,9 @@ ex) request scope ...
 ## request scope 예제 : http 요청 하나가 들어오고 나갈때까지 유지 
 - http 요청 끝날 때 소멸
 - 초기화 메서드 : 다른 http 요청과 구별을 위한 uuid
-- 프록시 : 원래 클래스 상속받은 가짜 객체를 연관관계 주입해 실제 객체 호출을 미룸 (cglib)
+- [프록시](src/main/java/hello/springs/common/MyLogger.java) : 원래 클래스 상속받은 가짜 객체를 연관관계 주입해 실제 객체 호출을 미룸 (cglib)
 
-=> http 요청이 들어와야 빈이 생성되는 차이를 해결할 수 있음 
+=> http 요청이 들어와야 빈이 생성되는 문제를 해결할 수 있음 
 
 
   
