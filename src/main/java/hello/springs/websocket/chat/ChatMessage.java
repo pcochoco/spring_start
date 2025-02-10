@@ -7,7 +7,7 @@ import lombok.Setter;
 @Setter
 public class ChatMessage {
     public enum MessageType{
-        ENTER, TALK //입장, 대화 상태
+        ENTER, JOIN, TALK //입장, 대화 상태
     }
     private MessageType type; //message type
     private String roomId; //채팅방 구별 id
