@@ -7,7 +7,7 @@ import org.springframework.web.socket.WebSocketSession;
 
 import java.util.HashSet;
 import java.util.Set;
-
+/*
 //only websocket
 @Getter
 public class ChatRoom {
@@ -35,3 +35,4 @@ public class ChatRoom {
         sessions.parallelStream().forEach(session -> chatService.sendMessage(session, message));
     }
 }
+*/

@@ -1,5 +1,5 @@
 package hello.springs.websocket.chat.handler;
-
+/*
 import com.fasterxml.jackson.databind.ObjectMapper;
 import hello.springs.websocket.chat.ChatMessage;
 import hello.springs.websocket.chat.ChatRoom;
@@ -16,10 +16,8 @@ import org.springframework.web.socket.WebSocketSession;
 import org.springframework.web.socket.handler.TextWebSocketHandler;
 @Slf4j
 @Component
-@RequiredArgsConstructor
 public class WebSocketChatHandler extends TextWebSocketHandler{
-    private final ObjectMapper objectMapper; //
-    private final ChatService chatService;
+
 
     @Override
     protected void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception{
@@ -35,3 +33,4 @@ public class WebSocketChatHandler extends TextWebSocketHandler{
     }
 
 }
+*/

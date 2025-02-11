@@ -14,9 +14,9 @@ public class STOMPChatRoom {
     private String name;
 
     public static STOMPChatRoom create(String name){
-        STOMPChatRoom STOMPChatRoom = new STOMPChatRoom();
-        STOMPChatRoom.roomId = UUID.randomUUID().toString();
-        STOMPChatRoom.name = name;
-        return STOMPChatRoom;
+        STOMPChatRoom stompChatRoom = new STOMPChatRoom();
+        stompChatRoom.roomId = UUID.randomUUID().toString();
+        stompChatRoom.name = name;
+        return stompChatRoom;
     }
 }

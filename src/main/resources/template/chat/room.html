@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Chat Room List</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.5.1/sockjs.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
+</head>
+<body>
+    <div class="app">
+        <h3>chat room list</h3>
+
+        <!-- make chat room -->
+        <div>
+            <label>chat room name</label>
+            <input type="text" v-model="roomName" placeholder="enter room name"> <!-- -->
+            <button @click="createRoom">create chat room</button> <!-- -->
+        </div>
+
+        <!-- chat room list-->
+        <ul>
+            <li v-for="room in chatRooms" :key="room.id">  <!-- -->
+                <a :href="'/chat/room/enter/' + room.id">{{room.name}}</a> <!-- -->
+            </li>
+        </ul>
+    </div>
+    <!-- javascript -->
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+                roomName: '',
+                chatRooms: []
+            },
+            created(){
+                this.fetchChatRooms();
+            },
+            methods: {
+                fetchChatRooms(){
+                    axios.get('/chat/rooms')
+                        .then(response => {
+                            this.chatRooms = response.data;
+                        })
+                        .catch(error => {
+                            console.error("Error fetching chat rooms", error);
+                        });
+                },
+                createRoom(){
+                    if(!this.roomName.trim()){
+                        alert("please enter a room name");
+                        return ;
+                    }
+                    axios.post('/chat/rooms', {name: this.roomName})
+                        .then(response => {
+                            alert("room created" + response.data.name);
+                            this.roomName = '';
+                            this.fetchChatRooms();
+                        })
+                        .catch(error => {
+                            alert("failed to create room");
+                            console.error(error);
+                        });
+                }
+            }
+        });
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Chat Room Detail</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.5.1/sockjs.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
+</head>
+<body>
+    <!-- chat msg 표시 -->
+    <div id="app">
+        <h2>chat room: <span th:text="${roomId}"></span></h2>
+        <ul>
+            <li v-for="msg in messages" :key="msg.id">
+                <strong>{{msg.sender}}:</strong>{{msg.content}}
+            </li>
+        </ul>
+    </div>
+    <!-- msg 입력 -->
+    <div>
+        <input type="text" v-model="messageContent" placeholder="enter message">
+        <button @click="sendMessage">send</button>
+    </div>
+    <script>
+      var stompSender = null;
+        new Vue({
+            el: '#app',
+            data: {
+                roomId: '[[${roomId}]]',
+                messages: [],
+                messageContent: '',
+                sender: localStorage.getItem('ws.chat.sender') || 'Guest'
+            },
+            created(){
+                this.connectWebSocket();
+            },
+            methods: {
+                connectWebSocket(){
+                    var socket = new SockJS('/ws-stomp');
+                    stompClient = Stomp.over(socket);
+                    stompClient.connect({}, frame => {
+                        console.log('connected' + frame);
+                        stompClient.subscribe(`/sub/chat/room/${this.roomId}`,response => {
+                            let message = JSON.parse(response.body);
+                            this.messages.push(message);
+                        });
+                    });
+                },
+                sendMessage(){
+                    if(!this.messageContent.trim()) return;
+                    let chatMessage = {
+                        type: 'TALK',
+                        roomId: this.roomId,
+                        sender: this.sender,
+                        message: this.messageContent
+                    };
+                    stompClient.send("/pub/chat/message", {}, JSON.stringify(chatMessage));
+                    this.messageContent='';
+                }
+                /*
+                fetchMessages(){
+                    axios.get(`/chat/room/${this.roomId}`)
+                        .then(response => {
+                            this.messages = response.data.messages;
+                        })
+                        .catch(error => {
+                            console.error("error fetching messages:", error);
+                        });
+                },
+                sendMessage(){
+                    if(!this.messageContent.trim()) return;
+                    axios.post(`/chat/room/${this.roomId}/send`,{
+                        sender: "User",
+                        content: this.messageContent
+                    }).then(() => {
+                        this.messages.push({sender: "User", content: this.messageContent});
+                        this.messageContent='';
+                    }).catch(error => {
+                        console.error("error sending message:", error);
+                    });
+                }
+                */
+            }
+
+        });
+
+    </script>
+</body>
+</html>

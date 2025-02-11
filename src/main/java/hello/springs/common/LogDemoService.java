@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.stereotype.Service;
 
+/*
 @Service
 @RequiredArgsConstructor
 public class LogDemoService {
@@ -15,3 +16,4 @@ public class LogDemoService {
         myLogger.log("service id = " + id);
     }
 }
+*/

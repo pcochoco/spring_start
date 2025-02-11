@@ -1,5 +1,6 @@
 package hello.springs.websocket.chat;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
 import javax.annotation.PostConstruct;
@@ -7,8 +8,11 @@ import java.util.*;
 
 //ChatService에 대한 대체
 //채팅방 생성, 조회
+@RequiredArgsConstructor
 @Repository
 public class ChatRoomRepository {
+
+
     private Map<String, STOMPChatRoom>  chatRoomSTOMPMap; //채팅방 목록
     @PostConstruct
     private void init(){
