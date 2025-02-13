@@ -6,24 +6,23 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 //채팅 화면(view) 용도로 분리
 //html
 //json -> js로 동적 표시
-//@RequiredArgsConstructor
+@RequiredArgsConstructor
 @Controller
 @RequestMapping("/chat")
 public class ChatRoomController {
     private final ChatRoomRepository chatRoomRepository;
-    public ChatRoomController(ChatRoomRepository chatRoomRepository) {
-        this.chatRoomRepository = chatRoomRepository;
-    }
+
     //프론트에서의 경로(단수 room)
     //채팅방 목록 화면
     @GetMapping("/room") //get - 직접 사용자가 경로 접근, 링크 접속 시 기본 동작
     public String chatRoomsPage(Model model){
         return "chat/room";
-    }
+    } //chat/room.html
 
     //rest api 엔드포인트(rooms) - 모든 채팅방 목록 조회
     @GetMapping("/rooms")
@@ -36,7 +35,8 @@ public class ChatRoomController {
     //사용자가 폼 제출 시 post 동작
     @PostMapping("/rooms")
     @ResponseBody
-    public STOMPChatRoom createRoom(@RequestParam String name){
+    public STOMPChatRoom createRoom(@RequestBody Map<String, String> requestData){
+        String name = requestData.get("name"); //json에서 name 추출
         return chatRoomRepository.createChatRoom(name);
     }
 

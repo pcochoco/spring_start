@@ -29,7 +29,7 @@ public class BeanLifeCycleTest {
     }
 
     @Configuration
-    static class LifeCycleConfig {//configuration class에 static keyword 불가
+    static class LifeCycleConfig2 {//configuration class에 static keyword 불가
         //NetworkClient에 대한 Configuration : 객체 생성과 반환
         @Bean
         public NetworkClient networkClient(){

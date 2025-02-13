@@ -30,7 +30,7 @@ public class SingletonTest {
 
     //singleton bean
     @Scope("singleton")
-    static class SingletonBean(){
+    static class SingletonBean{
         @PostConstruct
         public void init(){
             System.out.println("start");

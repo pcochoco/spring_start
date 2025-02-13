@@ -3,13 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <title>Chat Room List</title>
-    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.5.1/sockjs.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
 </head>
 <body>
-    <div class="app">
+    <div id="app">
         <h3>chat room list</h3>
 
         <!-- make chat room -->
@@ -21,11 +17,15 @@
 
         <!-- chat room list-->
         <ul>
-            <li v-for="room in chatRooms" :key="room.id">  <!-- -->
-                <a :href="'/chat/room/enter/' + room.id">{{room.name}}</a> <!-- -->
+            <li v-for="room in chatRooms" :key="room.roomId">  <!-- -->
+                <a :href="'/chat/room/enter/' + room.name">{{room.name}}</a> <!-- -->
             </li>
         </ul>
     </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.5.1/sockjs.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
     <!-- javascript -->
     <script>
         new Vue({
@@ -52,16 +52,18 @@
                         alert("please enter a room name");
                         return ;
                     }
-                    axios.post('/chat/rooms', {name: this.roomName})
-                        .then(response => {
-                            alert("room created" + response.data.name);
-                            this.roomName = '';
-                            this.fetchChatRooms();
-                        })
-                        .catch(error => {
-                            alert("failed to create room");
-                            console.error(error);
-                        });
+                    axios.post('/chat/rooms', {name: this.roomName},{
+                        headers: {'Content-Type': 'application/json'}
+                    })
+                    .then(response => {
+                        alert("room created" + response.data.name);
+                        this.roomName = '';
+                        this.fetchChatRooms();
+                    })
+                    .catch(error => {
+                        alert("failed to create room");
+                        console.error(error);
+                    });
                 }
             }
         });
