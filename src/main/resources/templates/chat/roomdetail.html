@@ -10,15 +10,17 @@
         <h2>chat room: <span th:text="${roomId}"></span></h2>
         <ul>
             <li v-for="msg in messages" :key="msg.id">
-                <strong>{{msg.sender}}:</strong>{{msg.content}}
+                <strong>{{msg.sender}}:</strong>{{msg.message}} <!-- messages에 대해 화면에 출력되는 값-->
+                <!-- vue랑 사용 변수가 통일되어야 함 -->
             </li>
         </ul>
-    </div>
     <!-- msg 입력 -->
-    <div>
-        <input type="text" v-model="messageContent" placeholder="enter message">
-        <button @click="sendMessage">send</button>
+        <div>
+            <input type="text" v-model="messageContent" placeholder="enter message">
+            <button @click="sendMessage">send</button> <!-- vue는 el: '#app'만 제어 : button은 #app 내부에 있어야 함  -->
+        </div>
     </div>
+    <!-- script src는 vue 시작하기 바로 전에 써줘야 함 -->
     <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.5.1/sockjs.min.js"></script>
@@ -37,51 +39,44 @@
                 this.connectWebSocket();
             },
             methods: {
+                //connect to WebSocket
                 connectWebSocket(){
                     var socket = new SockJS('/ws-stomp');
                     stompClient = Stomp.over(socket);
                     stompClient.connect({}, frame => {
-                        console.log('connected' + frame);
-                        stompClient.subscribe(`/sub/chat/room/${this.roomId}`,response => {
+                        //console.log('connected' + frame);
+                        stompClient.subscribe(`/sub/chat/room/${this.roomId}`, (response) => {
                             let message = JSON.parse(response.body);
-                            this.messages.push(message);
+                            //console.log("서버에서 받은 메시지:", message);
+                            this.messages.push(message); //messages 배열에메시지 추가
+                            //console.log("현재 messages 배열:", this.messages.length, this.messages);
+                            //this.$forceUpdate(); //변경 감지 못하는 경우 강제 갱신 - 비권장
                         });
+                        //console.log(`구독 완료`);
                     });
                 },
+                //send message
                 sendMessage(){
-                    if(!this.messageContent.trim()) return;
+                    if(!this.messageContent.trim()) {
+                        //console.error("메시지 내용 없음");
+                        return;
+                    }
                     let chatMessage = {
-                        type: 'TALK',
+                        type: 'TALK', //ChatMessage 필드에 맞게 값 매핑
                         roomId: this.roomId,
                         sender: this.sender,
                         message: this.messageContent
                     };
+                    if(!stompClient || !stompClient.connected){
+                        //console.error("stomp client 연결 안됨");
+                        return ;
+                    }
+                    //클라이언트에서 서버로 메시지 발행
                     stompClient.send("/pub/chat/message", {}, JSON.stringify(chatMessage));
                     this.messageContent='';
                 }
-                /*
-                fetchMessages(){
-                    axios.get(`/chat/room/${this.roomId}`)
-                        .then(response => {
-                            this.messages = response.data.messages;
-                        })
-                        .catch(error => {
-                            console.error("error fetching messages:", error);
-                        });
-                },
-                sendMessage(){
-                    if(!this.messageContent.trim()) return;
-                    axios.post(`/chat/room/${this.roomId}/send`,{
-                        sender: "User",
-                        content: this.messageContent
-                    }).then(() => {
-                        this.messages.push({sender: "User", content: this.messageContent});
-                        this.messageContent='';
-                    }).catch(error => {
-                        console.error("error sending message:", error);
-                    });
-                }
-                */
+
+
             }
 
         });

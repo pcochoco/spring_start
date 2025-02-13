@@ -17,7 +17,7 @@ public class WebSocketConfigSTOMP implements WebSocketMessageBrokerConfigurer {
     @Override
     public void registerStompEndpoints(StompEndpointRegistry registry){
         //stomp websocket : ws://localhost:8080/ws-stomp 접속
-        registry.addEndpoint("/ws-stomp").setAllowedOrigins("*")
-                .withSockJS();
+        registry.addEndpoint("/ws-stomp").setAllowedOriginPatterns("*")
+                .withSockJS(); //setAllowedOrigins는 allowCredentials와 같이 사용 불가
     }
 }
